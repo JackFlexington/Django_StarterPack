@@ -66,4 +66,14 @@ adduser dbadmin
 sudo -u dbadmin psql
 # If this works, continue guide.
 # If not, circle back and look for missed steps.
+
+# While at the postgres Command line interface prompt (Example: dbadmin=#)
+\conninfo
+# \conninfo results in current postgres database connections present on the system.
+
+CREATE DATABASE main;                             # Create database
+GRANT ALL PRIVILEGES ON DATABASE main TO dbadmin; # Allow dbadmin to perform all database admin functions.
 ```
+### If you've been successful so far, pat yourself on the back. System is officially configured to handle a Django project!
+
+## Initializing the Django project
