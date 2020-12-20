@@ -1,7 +1,7 @@
 # GitHub Repository: Django_StarterPack
 
 # Start here (manual installation)
-# Environment Documentation is based off of
+# Environment Documentation
 ## Operating System
 * Acquired image on 12/20/2020
 * Ubuntu Desktop 20.04.1 LTS (file name = ```ubuntu-20.04.1-desktop-amd64.iso```)
