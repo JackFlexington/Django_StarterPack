@@ -77,3 +77,16 @@ GRANT ALL PRIVILEGES ON DATABASE main TO dbadmin; # Allow dbadmin to perform all
 ### If you've been successful so far, pat yourself on the back. System is officially configured to handle a Django project!
 
 ## Initializing the Django project
+```bash
+cd ~                    # Navigate to home directory
+sudo mkdir django       # Make folder
+sudo chown $USER django # Give $USER ownership over django folder
+
+cd django/
+django-admin startproject Django_StarterPack # Give a name to the overall application
+cd Django_StaterPack                         # Navigate to freshly created application folder
+python3 manage.py migrate         # Update Django framework for database models
+python3 manage.py createsuperuser # Create a super user to interact with Django
+  # username = dbadmin | email = | password = secureDBpassword
+# Just used the same profile that manages the database, to manage the Django framework
+```
