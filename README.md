@@ -49,6 +49,7 @@ pip3 install Django          # Install latest Django
 sudo su root
 apt-get update && apt-get install vim
 # Note: I'm not sure why, but the base update / upgrade doesn't seem to update the native VI text editor. Performing this step is highly recommended as it drastically improves the usability of VI.
+exit # or (CTRL+D)
 ```
 
 ## Database Configuration
