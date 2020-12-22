@@ -6,8 +6,6 @@
 * VI Text Editor is my editor of choice due to its portibitilty and how its on nearly all Linux systems.
   * [Hands-on down the best VIM Text Editor book](https://www.amazon.com/Mastering-Vim-Quickly-WTF-time/dp/1983325740)
 
-# Start here (manual installation)
-
 # Environment Documentation
 
 ## Operating System Information
@@ -20,6 +18,8 @@
 * Note: If you're using a Virtual Machine via "VMware" or "Virtual Box" or one of the others... remember to mount the .iso image so that you may install the operating system with ease.
 * Package Manager: [Advanced Package Tool(APT)](https://ubuntu.com/server/docs/package-management)
 
+# Start here (manual installation)
+
 ## Booting on the machine
 * Enable "[Canonical Livepatch Service](https://ubuntu.com/security/livepatch)".
   * Note: This will require you to make a "Ubuntu One" account.
@@ -30,22 +30,27 @@
   * Exit root mode (Ctrl + D) or type "exit".
 
 ## System Configuration
-* Open "Terminal" -> ```sudo su root```
+### Installing Python3
+* Open "Terminal"
 ```bash
+# [As ${USER}]
+sudo su root
 apt install -y python3     # Install latest python
 apt install -y python3-pip # Install latest pip (Python package manager)
 python3 --version          # Verify installation worked
-```  
-  * Exit root mode (Ctrl + D) or type "exit".
-* [ as user ]
+exit # or (CTRL + D)
+``` 
+### Installing Postgres binary && Django
 ```bash
+# [As ${USER}]
 pip3 install psycopg2-binary # Install postgres binary
 pip3 install Django          # Install latest Django
 ```
   * If warnings occur regarding $PATH, type ```source ~/.profile``` this'll reload the system files and update the PATH with the recently initialized ```/home/${USER}/.local/bin```.
  
-* Updating VI text editor
+### Updating VI text editor
 ```bash
+# [As ${USER}]
 sudo su root
 apt-get update && apt-get install vim
 # Note: I'm not sure why, but the base update / upgrade doesn't seem to update the native VI text editor. Performing this step is highly recommended as it drastically improves the usability of VI.
@@ -54,16 +59,18 @@ exit # or (CTRL+D)
 
 ## Database Configuration
 Source: [Installing Postgres](https://www.postgresql.org/download/linux/ubuntu/)
-* Configure postgres to receive live updates via "Livepatch service".
+### Configure postgres to receive live updates via "Livepatch service".
 ```bash
+# [As ${USER}]
 sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 sudo apt-get update
 sudo apt-get -y install postgresql
 ```
-* Add authentication / configuring database to run for postgres
-  * Link: [source](https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-20-04-quickstart)
+### Add authentication / configuring database to run for postgres
+Link: [source](https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-20-04-quickstart)
 ```bash
+# [As ${USER}]
 # Create superuser
 sudo su root             # Login as "root"
 su postgres              # Login as "postgres"
@@ -72,9 +79,10 @@ createuser --interactive # Create user
   # Yes to superuser
 createdb dbadmin
 # Exit "postgres" user
+# [As root]
 adduser dbadmin
 ```
-* Verifying all is good
+### Verify postgres database
 ```bash
 # Exit to "${USER}"
 sudo -u dbadmin psql
@@ -88,34 +96,47 @@ sudo -u dbadmin psql
 CREATE DATABASE main;                             # Create database
 GRANT ALL PRIVILEGES ON DATABASE main TO dbadmin; # Allow dbadmin to perform all database admin functions.
 ```
-### If you've been successful so far, pat yourself on the back. System is officially configured to handle a Django project!
+If you've been successful so far, pat yourself on the back. System is officially configured to handle a Django project!
 
 ## Initializing the Django project
+### Initialize project directories
 ```bash
+# [As ${USER}]
 cd ~                    # Navigate to home directory
 sudo mkdir django       # Make folder
 sudo chown $USER django # Give $USER ownership over django folder
 
 cd django/
 django-admin startproject Django_StarterPack # Give a name to the overall application
+# Note: Directory will look like /Django_StarterPack/Django_StarterPack/
+```
+### Configure project
+```bash
+# [As ${USER}]
 cd Django_StaterPack                         # Navigate to freshly created application folder
-python3 manage.py migrate         # Update Django framework for database models
-python3 manage.py createsuperuser # Create a super user to interact with Django
-  # username = dbadmin | email = | password = secureDBpassword
-  # Just used the same profile that manages the database, to manage the Django framework
-
-# This will initialize the appropriate files / folders
-# for storing the actual web application
-python3 manage.py startapp main_app
-
 vi Django_StarterPack/settings.py
   # Modify ALLOWED_HOSTS = ["*"] # WARNING: NOT IDEAL FOR PRODUCTION ENVIRONMENT
   # Add "main_app" to the list inside of INSTALLED_APPS = []
   # Add "postgreSQL" to the list of DATABASES = {}
   # Modify "TIME_ZONE" to your native time. (See link: "List of database time zones")
+  
+python3 manage.py migrate         # Update Django framework for database models
+python3 manage.py createsuperuser # Create a super user to interact with Django
+  # username = dbadmin | email = | password = secureDBpassword
+  # Just used the same profile that manages the database, to manage the Django framework
 ```
 Link: [List of database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+
+### Initialize application directories 
 ```bash
+# [As ${USER}]
+# This will initialize the appropriate files / folders
+# for storing the actual web application
+python3 manage.py startapp main_app
+```
+### Configure application files
+```bash
+# [As ${USER}]
 vi Django_StarterPack/urls.py
   # Add url for "main_app" and redirect "" -> "main_app"
   # Enable serving of static files (CSS, JS, HTML, IMAGES, GIFS, etc...)
@@ -134,13 +155,13 @@ vi templates/index.html
 cd ../ # Navigate back to parent directory
 ```
 ```bash
+# [As ${USER}]
 # Triple check that postgres password is setup correctly
 sudo su postgres
 psql
 ALTER USER dbadmin WITH PASSWORD 'secureDBpassword';
 \q
 exit # Or (CTRL+D)
-sudo su dbadmin
 python3 manage.py makemigrations
 python3 manage.py migrate
 python3 manage.py runserver 0.0.0.0:8000
