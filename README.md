@@ -66,6 +66,11 @@ wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add
 sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
 sudo apt install code
 ```
+1. Open Visual Studio Code
+2. Open "Extensions" (Ctrl + Shift + X)
+3. Search & Install "GitHub Pull Requests and Issues"
+4. Whenever you spin up the Django application, you can open the folder within Visual Studio Code and manage the repository through the previously installed extension.
+Note: The ideal place to open a folder is the same directory used to interact with "manage.py".
 
 ## Database Configuration
 Source: [Installing Postgres](https://www.postgresql.org/download/linux/ubuntu/)
