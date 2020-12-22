@@ -1,5 +1,11 @@
 # GitHub Repository: Django_StarterPack
 
+# Before we start
+* This document assumes you have fundamental Linux command line interface understandings
+  * [Very great tutorial for learning Linux commands](https://linuxjourney.com/)
+* VI Text Editor is my editor of choice due to its portibitilty and how its on nearly all Linux systems.
+  * [Hands-on down the best VIM Text Editor book](https://www.amazon.com/Mastering-Vim-Quickly-WTF-time/dp/1983325740)
+
 # Start here (manual installation)
 
 # Environment Documentation
@@ -116,6 +122,8 @@ vi views.py
 mkdir templates/
 vi templates/index.html
   # Just add something here... example "hello world"
+  
+cd ../ # Navigate back to parent directory
 ```
 ```bash
 # Triple check that postgres password is setup correctly
@@ -130,3 +138,11 @@ python3 manage.py migrate
 python3 manage.py runserver 0.0.0.0:8000
 ```
 If you're able to navigate to "127.0.0.1:8000" in any web browser then you've successfully configured this machine to run Django.
+
+# Sources / Reference material:
+* [Overall guide for Django initialization](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Tutorial_local_library_website)
+* [PostgreSQL database configuration](https://docs.djangoproject.com/en/2.0/ref/settings/#databases)
+* [Configure postgreSQL on system](https://www.cyberciti.biz/faq/howto-add-postgresql-user-account/)
+* [Installing Visual Studio to Linux System](https://code.visualstudio.com/docs/setup/linux#_rhel-fedora-and-centos-based-distributions)
+* [Learn about C++ GNU compiler](https://www.tutorialspoint.com/How-to-Install-Cplusplus-Compiler-on-Linux)
+* [Installation C++ GNU compiler guide](https://gcc.gnu.org/install/)
