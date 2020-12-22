@@ -154,6 +154,7 @@ vi templates/index.html
   
 cd ../ # Navigate back to parent directory
 ```
+### Configure postgres
 ```bash
 # [As ${USER}]
 # Triple check that postgres password is setup correctly
