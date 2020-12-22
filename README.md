@@ -77,10 +77,11 @@ sudo apt install code
   cd ~
   wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   sudo apt install ./google-chrome-stable_current_amd64.deb
+  sudo apt update && apt upgrade
   ```
   * Search for "Default Applications" and set Google Chrome as default web browser.
   * Now when you navigate through the sign in process on GitHub, accept each one of the pop-ups to ensure that Visual Studio has everything it needs to appropriate as expected.
-  * 
+  * ```sudo apt-get remove -y google-chrome-stable``` for when you're done authenticating Visual Studio Code through Chrome. (Source: [Uninstall Google Chrome](https://askubuntu.com/questions/67047/how-to-uninstall-google-chrome))
 5. Whenever you spin up the Django application, you can open the folder within Visual Studio Code and manage the repository through the previously installed extension.
   * Note: The ideal place to open a folder is the same directory used to interact with "manage.py".
 
