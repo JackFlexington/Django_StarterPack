@@ -58,6 +58,7 @@ exit # or (CTRL+D)
 ```
 
 ### [Optional] Installing Visual Studio Code
+Source: [Install Visual Studio Code](https://linuxize.com/post/how-to-install-visual-studio-code-on-ubuntu-20-04/)
 ```bash
 # [As ${USER}]
 sudo apt update
@@ -66,11 +67,22 @@ wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add
 sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
 sudo apt install code
 ```
-1. Open Visual Studio Code
+1. Open Visual Studio Code (VS)
 2. Open "Extensions" (Ctrl + Shift + X)
 3. Search & Install "GitHub Pull Requests and Issues"
-4. Whenever you spin up the Django application, you can open the folder within Visual Studio Code and manage the repository through the previously installed extension.
-Note: The ideal place to open a folder is the same directory used to interact with "manage.py".
+4. Navigate to bottom-left of VS screen to sign in, this will open up the browser and request you to sign into GitHub.
+  * Note: Had to install Google Chrome
+  ```bash
+  # [As ${USER}]
+  cd ~
+  wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  sudo apt install ./google-chrome-stable_current_amd64.deb
+  ```
+  * Search for "Default Applications" and set Google Chrome as default web browser.
+  * Now when you navigate through the sign in process on GitHub, accept each one of the pop-ups to ensure that Visual Studio has everything it needs to appropriate as expected.
+  * 
+5. Whenever you spin up the Django application, you can open the folder within Visual Studio Code and manage the repository through the previously installed extension.
+  * Note: The ideal place to open a folder is the same directory used to interact with "manage.py".
 
 ## Database Configuration
 Source: [Installing Postgres](https://www.postgresql.org/download/linux/ubuntu/)
