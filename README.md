@@ -102,6 +102,26 @@ vi Django_StarterPack/settings.py
 ```
 Link: [List of database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
 ```bash
+vi Django_StarterPack/urls.py
+  # Add url for "main_app" and redirect "" -> "main_app"
+  # Enable serving of static files (CSS, JS, HTML, IMAGES, GIFS, etc...)
+  
 vi main_app/urls.py
-  # 
+  # Add path for index
+  
+vi main_app/views.py
+  # Add index view
 ```
+```bash
+# Triple check that postgres password is setup correctly
+sudo su postgres
+psql
+ALTER USER dbadmin WITH PASSWORD 'secureDBpassword';
+\q
+exit # Or (CTRL+D)
+sudo su dbadmin
+python3 manage.py makemigrations
+python3 manage.py migrate
+python3 manage.py runserver 0.0.0.0:8000
+```
+If you're able to navigate to "127.0.0.1:8000" in any web browser then you've successfully configured this machine to run Django.
