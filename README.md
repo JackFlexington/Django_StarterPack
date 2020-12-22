@@ -43,6 +43,13 @@ pip3 install psycopg2-binary # Install postgres binary
 pip3 install Django          # Install latest Django
 ```
   * If warnings occur regarding $PATH, type ```source ~/.profile``` this'll reload the system files and update the PATH with the recently initialized ```/home/${USER}/.local/bin```.
+ 
+* Updating VI text editor
+```bash
+sudo su root
+apt-get update && apt-get install vim
+# Note: I'm not sure why, but the base update / upgrade doesn't seem to update the native VI text editor. Performing this step is highly recommended as it drastically improves the usability of VI.
+```
 
 ## Database Configuration
 Source: [Installing Postgres](https://www.postgresql.org/download/linux/ubuntu/)
