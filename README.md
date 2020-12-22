@@ -106,11 +106,16 @@ vi Django_StarterPack/urls.py
   # Add url for "main_app" and redirect "" -> "main_app"
   # Enable serving of static files (CSS, JS, HTML, IMAGES, GIFS, etc...)
   
-vi main_app/urls.py
+cd main_app/
+vi urls.py
   # Add path for index
   
-vi main_app/views.py
+vi views.py
   # Add index view
+  
+mkdir templates/
+vi templates/index.html
+  # Just add something here... example "hello world"
 ```
 ```bash
 # Triple check that postgres password is setup correctly
