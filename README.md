@@ -88,5 +88,20 @@ cd Django_StaterPack                         # Navigate to freshly created appli
 python3 manage.py migrate         # Update Django framework for database models
 python3 manage.py createsuperuser # Create a super user to interact with Django
   # username = dbadmin | email = | password = secureDBpassword
-# Just used the same profile that manages the database, to manage the Django framework
+  # Just used the same profile that manages the database, to manage the Django framework
+
+# This will initialize the appropriate files / folders
+# for storing the actual web application
+python3 manage.py startapp main_app
+
+vi Django_StarterPack/settings.py
+  # Modify ALLOWED_HOSTS = ["*"] # WARNING: NOT IDEAL FOR PRODUCTION ENVIRONMENT
+  # Add "main_app" to the list inside of INSTALLED_APPS = []
+  # Add "postgreSQL" to the list of DATABASES = {}
+  # Modify "TIME_ZONE" to your native time. (See link: "List of database time zones")
+```
+Link: [List of database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+```bash
+vi main_app/urls.py
+  # 
 ```
