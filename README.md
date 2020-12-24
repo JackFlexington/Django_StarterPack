@@ -85,6 +85,20 @@ sudo apt install code
 5. Whenever you spin up the Django application, you can open the folder within Visual Studio Code and manage the repository through the previously installed extension.
   * Note: The ideal place to open a folder is the same directory used to interact with "manage.py".
 
+### Installing Git
+```bash
+# [As ${USER}]
+sudo apt update      # update module index
+sudo apt install -y git # install git
+git --verison        # check verison
+```
+
+### Configure Git locally
+```bash
+git config --global user.name "<YOUR_USERNAME>"
+git config --global user.email "<EMAIL>@<DOMAIN.COM>"
+```
+
 ## Database Configuration
 Source: [Installing Postgres](https://www.postgresql.org/download/linux/ubuntu/)
 ### Configure postgres to receive live updates via "Livepatch service".
