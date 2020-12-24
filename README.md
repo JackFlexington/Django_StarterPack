@@ -95,6 +95,7 @@ git --verison        # check verison
 
 ### Configure Git locally
 ```bash
+# [As ${USER}]
 git config --global user.name "<YOUR_USERNAME>"
 git config --global user.email "<EMAIL>@<DOMAIN.COM>"
 ```
