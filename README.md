@@ -219,3 +219,4 @@ If you're able to navigate to "127.0.0.1:8000" in any web browser then you've su
 * [Installing Visual Studio to Linux System](https://code.visualstudio.com/docs/setup/linux#_rhel-fedora-and-centos-based-distributions)
 * [Learn about C++ GNU compiler](https://www.tutorialspoint.com/How-to-Install-Cplusplus-Compiler-on-Linux)
 * [Installation C++ GNU compiler guide](https://gcc.gnu.org/install/)
+* [Git config username / email](https://linuxize.com/post/how-to-configure-git-username-and-email/)
