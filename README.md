@@ -215,6 +215,13 @@ If you're able to navigate to "127.0.0.1:8000" in any web browser then you've su
 ## Constructing database tables
 Note: Pending section...
 
+# Basic Troubleshooting
+* Had an issue where "127.0.0.1:8000/admin" wouldn't allow me to log in. Re ran the following to resolve.
+  ```
+  python3 manage.py createsuperuser # Create a super user to interact with Django
+  # username = dbadmin | email = | password = secureDBpassword
+  ```
+
 # Sources / Reference material:
 * [Overall guide for Django initialization](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Tutorial_local_library_website)
 * [PostgreSQL database configuration](https://docs.djangoproject.com/en/2.0/ref/settings/#databases)
