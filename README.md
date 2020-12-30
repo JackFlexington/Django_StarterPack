@@ -212,6 +212,9 @@ python3 manage.py runserver 0.0.0.0:8000
 ```
 If you're able to navigate to "127.0.0.1:8000" in any web browser then you've successfully configured this machine to run Django.
 
+## Constructing database tables
+Note: Pending section...
+
 # Sources / Reference material:
 * [Overall guide for Django initialization](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Tutorial_local_library_website)
 * [PostgreSQL database configuration](https://docs.djangoproject.com/en/2.0/ref/settings/#databases)
