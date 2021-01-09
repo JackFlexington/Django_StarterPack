@@ -213,11 +213,54 @@ python3 manage.py runserver 0.0.0.0:8000
 If you're able to navigate to "127.0.0.1:8000" in any web browser then you've successfully configured this machine to run Django.
 
 ## Constructing database tables
-Note: Pending section...
+```bash
+# [As ${USER}]
+sudo su root # Sign in as "root" of system
+su dbadmin   # Sign in as "database administrator"
+psql main    # Log into postgres database that was created earlier
+
+# [POSTGRES EDITOR]
+CREATE DATABASE member; # customer information
+CREATE DATABASE products; # Items the store sells
+CREATE DATABASE transaction; # Interactions between customer and store
+\q
+
+# [As ${USER}]
+exit # Or (CTRL+D) # Out of "dbadmin"
+exit # Or (CTRL+D) # Out of "root"
+```
+
+## Creating the Models
+```bash
+# [As ${USER}]
+vi main_app/models.py
+  # See https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Models#author_model for example of how to create the models.
+  # Note: Will be coming back in the future to provide an example.
+```
+Link: [Example of Model creation](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Models#author_model)
+
+## Registering databases in Django
+```bash
+# [As ${USER}]
+cd ~/django/Django_StarterPack # Navigate to application directory, if needed.
+vi main_app/admin.py # Open admin file to register newly created databases.
+  # Add "from .models import Member, Products, Transactions"
+  # Add "admin.site.register(Member)"
+  # Add "admin.site.register(Products)"
+  # Add "admin.site.register(Transactions)"
+```
+
+## Finalizing Databases on the server
+```bash
+# [As ${USER}]
+python3 manage.py makemigrations          # Make database model changes
+python3 manage.py migrate                 # Commit changes
+python3 manage.py runserver 0.0.0.0:8000  # Start server
+```
 
 # Basic Troubleshooting
 * Had an issue where "127.0.0.1:8000/admin" wouldn't allow me to log in. Re ran the following to resolve.
-  ```
+  ```bash
   python3 manage.py createsuperuser # Create a super user to interact with Django
   # username = dbadmin | email = | password = secureDBpassword
   ```
