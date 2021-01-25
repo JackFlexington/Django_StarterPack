@@ -25,7 +25,7 @@
   * Note: This will require you to make a "Ubuntu One" account.
 * A window called "Software Updater" will likely pop-up, prompting the user to update software that currently exists on the system. (i.e. Firefox, Ubuntu base, Libre Office suite, etc...)
   * When prompted, restart the machine.
-* Open "Terminal" -> ```sudo su root``` -> ```apt update && upgrade```
+* Open "Terminal" -> ```sudo su root``` -> ```apt update && apt upgrade```
   * Most likely nothing will occur due to the prior steps "Software Updater"... however, the system may prompt you to remove no longer necessary packages. If prompted type ```apt autoremove```
   * Exit root mode (Ctrl + D) or type "exit".
 
@@ -124,6 +124,7 @@ createdb dbadmin
 # Exit "postgres" user
 # [As root]
 adduser dbadmin
+# password = "secureDBpassword"
 ```
 ### Verify postgres database
 ```bash
@@ -138,6 +139,7 @@ sudo -u dbadmin psql
 
 CREATE DATABASE main;                             # Create database
 GRANT ALL PRIVILEGES ON DATABASE main TO dbadmin; # Allow dbadmin to perform all database admin functions.
+\q # Quits back to ${USER}
 ```
 If you've been successful so far, pat yourself on the back. System is officially configured to handle a Django project!
 
@@ -212,7 +214,7 @@ python3 manage.py runserver 0.0.0.0:8000
 ```
 If you're able to navigate to "127.0.0.1:8000" in any web browser then you've successfully configured this machine to run Django.
 
-## Constructing database tables
+## Constructing database tables (DEPRECATED; NOT NEEDED)
 ```bash
 # [As ${USER}]
 sudo su root # Sign in as "root" of system
@@ -258,12 +260,22 @@ python3 manage.py migrate                 # Commit changes
 python3 manage.py runserver 0.0.0.0:8000  # Start server
 ```
 
+## Pat yourself on the back, we've officially gotten the Django server spun up
+Now, we're going to be skipping the creation of the actual web application in order to explain how to create an AWS instance to house this Django project!
+
 # Basic Troubleshooting
 * Had an issue where "127.0.0.1:8000/admin" wouldn't allow me to log in. Re ran the following to resolve.
   ```bash
   python3 manage.py createsuperuser # Create a super user to interact with Django
   # username = dbadmin | email = | password = secureDBpassword
   ```
+* Had an issue where the database tables weren't being generated when using ```python3 manage.py makemigrations``` However, discovered that sometimes you need to explicitly target the django "INSTALLED_APP".
+  ```
+  # Specifically I mean to do the following
+  python3 manage.py makemigrations main_app # As described above
+  python3 manage.py migrate main_app
+  ```
+  Source: [StackOverflow Posting](https://stackoverflow.com/questions/39265898/programmingerror-error-during-template-rendering) && also error output from Django Application
 
 # Sources / Reference material:
 * [Overall guide for Django initialization](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Tutorial_local_library_website)
