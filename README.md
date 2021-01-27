@@ -290,6 +290,7 @@ python3 manage.py runserver 0.0.0.0:8000 # Run the server as normal
 # If you'd like to reconnect to the most recently opened "screen", type the below
 screen -r # Connects to screen again
 ```
+Source: [StackOverflow](https://stackoverflow.com/questions/10656147/how-do-i-keep-my-django-server-running-even-after-i-close-my-ssh-session)
 
 # Sources / Reference material:
 * [Overall guide for Django initialization](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Tutorial_local_library_website)
