@@ -279,18 +279,18 @@ Now, we're going to be skipping the creation of the actual web application in or
   
 # General Tips
 * Need to close your SSH connection / Terminal for any reason? See "[screen](http://www.gnu.org/software/screen/)" from GNU software... (Use case below)
-```bash
-# Log into Terminal
-screen # Activates the screen package (if downloaded)
-cd ${DJANGO_DIRECTORY} # Change to directory that houses the "manage.py" file
-python3 manage.py runserver 0.0.0.0:8000 # Run the server as normal
-# Press both (ctrl + a) keys
-# Prees "d" to disconnect from "screen"
-# Now we're back in the old Terminal that we know and love
-# If you'd like to reconnect to the most recently opened "screen", type the below
-screen -r # Connects to screen again
-```
-Source: [StackOverflow](https://stackoverflow.com/questions/10656147/how-do-i-keep-my-django-server-running-even-after-i-close-my-ssh-session)
+   ```bash
+   # Log into Terminal
+   screen # Activates the screen package (if downloaded)
+   cd ${DJANGO_DIRECTORY} # Change to directory that houses the "manage.py" file
+   python3 manage.py runserver 0.0.0.0:8000 # Run the server as normal
+   # Press both (ctrl + a) keys
+   # Prees "d" to disconnect from "screen"
+   # Now we're back in the old Terminal that we know and love
+   # If you'd like to reconnect to the most recently opened "screen", type the below
+   screen -r # Connects to screen again
+   ```
+   Source: [StackOverflow](https://stackoverflow.com/questions/10656147/how-do-i-keep-my-django-server-running-even-after-i-close-my-ssh-session)
 
 # Sources / Reference material:
 * [Overall guide for Django initialization](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Tutorial_local_library_website)
