@@ -9,14 +9,14 @@
 # Environment Documentation
 
 ## Operating System Information
-* Acquired image on 12/20/2020
-* Ubuntu Desktop 20.04.1 LTS (file name = ```ubuntu-20.04.1-desktop-amd64.iso```)
+* Acquired image on 02/06/2021
+* Ubuntu Desktop 20.04.2 LTS (file name = ```ubuntu-20.04.2-desktop-amd64.iso```)
 * Debian-based
-* ISO file size: ~2.6-gigs (exact = ```2,785,017,856 bytes```)
+* ISO file size: ~2.67-gigs (exact = ```2,877,227,008 bytes```)
 * Link: [Download Ubuntu Desktop](https://ubuntu.com/download/desktop)
 * Link: [Release Notes](https://wiki.ubuntu.com/FocalFossa/ReleaseNotes)
 * Note: If you're using a Virtual Machine via "VMware" or "Virtual Box" or one of the others... remember to mount the .iso image so that you may install the operating system with ease.
-* Package Manager: [Advanced Package Tool(APT)](https://ubuntu.com/server/docs/package-management)
+* Package Manager Information: [Advanced Package Tool(APT)](https://ubuntu.com/server/docs/package-management)
 
 # Start here (manual installation)
 
@@ -52,7 +52,7 @@ pip3 install Django          # Install latest Django
 ```bash
 # [As ${USER}]
 sudo su root
-apt-get update && apt-get install vim
+apt-get update && apt-get install -y vim
 # Note: I'm not sure why, but the base update / upgrade doesn't seem to update the native VI text editor. Performing this step is highly recommended as it drastically improves the usability of VI.
 exit # or (CTRL+D)
 ```
@@ -61,6 +61,7 @@ exit # or (CTRL+D)
 Source: [Install Visual Studio Code](https://linuxize.com/post/how-to-install-visual-studio-code-on-ubuntu-20-04/)
 ```bash
 # [As ${USER}]
+# Note, executing these lines individually is preferred.
 sudo apt update
 sudo apt install -y software-properties-common apt-transport-https wget
 wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
@@ -71,7 +72,7 @@ sudo apt install code
 2. Open "Extensions" (Ctrl + Shift + X)
 3. Search & Install "GitHub Pull Requests and Issues"
 4. Navigate to bottom-left of VS screen to sign in, this will open up the browser and request you to sign into GitHub.
-  * Note: Had to install Google Chrome
+  * Note: Didn't require me to install Google Chrome to accept the URI link... But know you may need to Google Chrome should the link not work. (This is required to access GitHub from Visual Studio Code.) 
   ```bash
   # [As ${USER}]
   cd ~
