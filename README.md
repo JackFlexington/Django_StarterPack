@@ -286,7 +286,7 @@ Now, we're going to be skipping the creation of the actual web application in or
    cd ${DJANGO_DIRECTORY} # Change to directory that houses the "manage.py" file
    python3 manage.py runserver 0.0.0.0:8000 # Run the server as normal
    # Press both (ctrl + a) keys
-   # Prees "d" to disconnect from "screen"
+   # Press "d" to disconnect from "screen"
    # Now we're back in the old Terminal that we know and love
    # If you'd like to reconnect to the most recently opened "screen", type the below
    screen -r # Connects to screen again
