@@ -162,44 +162,21 @@ django-admin startproject Django_StarterPack # Give a name to the overall applic
 cd Django_StaterPack                         # Navigate to freshly created application folder
 vi Django_StarterPack/settings.py
   # Modify ALLOWED_HOSTS = ["*"] # WARNING: NOT IDEAL FOR PRODUCTION ENVIRONMENT
-  # Add "main_app" to the list inside of INSTALLED_APPS = []
   # Add "postgreSQL" to the list of DATABASES = {}
   # Modify "TIME_ZONE" to your native time. (See link: "List of database time zones")
-  
-python3 manage.py migrate         # Update Django framework for database models
-python3 manage.py createsuperuser # Create a super user to interact with Django
-  # username = dbadmin | email = | password = secureDBpassword
-  # Just used the same profile that manages the database, to manage the Django framework
 ```
 Link: [List of database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
-
 ### Initialize application directories 
 ```bash
 # [As ${USER}]
 # This will initialize the appropriate files / folders
 # for storing the actual web application
 python3 manage.py startapp main_app
+
+vi Django_StarterPack/settings.py
+  # Add "main_app" to the list inside of INSTALLED_APPS = []
 ```
-### Configure application files
-```bash
-# [As ${USER}]
-vi Django_StarterPack/urls.py
-  # Add url for "main_app" and redirect "" -> "main_app"
-  # Enable serving of static files (CSS, JS, HTML, IMAGES, GIFS, etc...)
-  
-cd main_app/
-vi urls.py
-  # Add path for index
-  
-vi views.py
-  # Add index view
-  
-mkdir templates/
-vi templates/index.html
-  # Just add something here... example "hello world"
-  
-cd ../ # Navigate back to parent directory
-```
+
 ### Configure postgres
 ```bash
 # [As ${USER}]
@@ -209,13 +186,99 @@ psql
 ALTER USER dbadmin WITH PASSWORD 'secureDBpassword';
 \q
 exit # Or (CTRL+D)
+python3 manage.py createsuperuser # Create a super user to interact with Django
+  # username = dbadmin | email = | password = secureDBpassword
+  # Just used the same profile that manages the database, to manage the Django framework
 python3 manage.py makemigrations
 python3 manage.py migrate
+
+# Test configuration by running the Django server
 python3 manage.py runserver 0.0.0.0:8000
 ```
 If you're able to navigate to "127.0.0.1:8000" in any web browser then you've successfully configured this machine to run Django.
 
-## Constructing database tables (DEPRECATED; NOT NEEDED)
+### Configure Django url file (Django_StarterPack)
+```bash
+# [As ${USER}]
+vi Django_StarterPack/urls.py
+  # Add url for "main_app" and redirect "" -> "main_app"
+  # Enable serving of static files (CSS, JS, HTML, IMAGES, GIFS, etc...)
+```
+#### url.py example
+```bash
+# Libraries
+from django.contrib import admin
+from django.urls import path, include
+from django.views.generic import RedirectView
+
+# Default URL
+urlpatterns = [
+    path('admin/', admin.site.urls),
+]
+
+# Custom URL
+urlpatterns += [
+    path('main_app/', include('main_app.urls')),
+    path('', RedirectView.as_view(url='main_app/', permanent=True)),
+]
+
+# Serving static files
+from django.conf import settings
+from django.conf.urls.static import static
+
+# Location of "static/" folder
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+```
+
+### Configure Django application files (main_app)
+```bash
+cd main_app/
+vi urls.py
+  # Add path for index
+  # (See example below)
+  
+#### urls.py
+# Libraries
+from django.urls import path
+from . import views
+
+# Custom URL schema
+urlpatterns = [
+    path('', views.index, name='index'),
+]
+#### END urls.py EXAMPLE
+  
+vi views.py
+  # Add index view
+  # (See example below)
+
+#### views.py
+from django.shortcuts import render, HttpResponseRedirect
+from django.http import HttpRequest, HttpResponse
+
+# Create your views here.
+# Import database Classes # (LEAVE BELOW LINE BLANK UNTIL YOU'VE CREATED DATABASE TABLES) 
+from main_app.models import Student # (Example piece).
+
+def index(request):
+    """View function for home page of website."""
+    
+    # Acquire values from Django database and store them into this dictionary.
+    context = {}
+    
+    # Render webpage
+    return render(request, 'index.html', context=context)
+#### END views.py EXAMPLE
+
+# templates/ folder is where the reusable HTML code sections will reside.
+mkdir templates/
+vi templates/index.html
+  # Just add something here... example "hello world"
+  
+cd ../ # Navigate back to parent directory
+```
+
+## Constructing database tables
 ```bash
 # [As ${USER}]
 sudo su root # Sign in as "root" of system
@@ -223,7 +286,7 @@ su dbadmin   # Sign in as "database administrator"
 psql main    # Log into postgres database that was created earlier
 
 # [POSTGRES EDITOR]
-CREATE DATABASE member; # customer information
+CREATE DATABASE member; # Customer information
 CREATE DATABASE products; # Items the store sells
 CREATE DATABASE transaction; # Interactions between customer and store
 \q
