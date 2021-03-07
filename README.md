@@ -139,7 +139,6 @@ psql -d main
 \conninfo
 # \conninfo results in current postgres database connections present on the system.
 
-CREATE DATABASE main;                             # Create database
 GRANT ALL PRIVILEGES ON DATABASE main TO dbadmin; # Allow dbadmin to perform all database admin functions.
 \q # Quits back to dbadmin
 exit # Exit to ${USER}
