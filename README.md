@@ -121,7 +121,7 @@ su postgres              # Login as "postgres"
 createuser --interactive # Create user 
   # Role = dbadmin
   # Yes to superuser
-createdb dbadmin
+createdb main
 # Exit "postgres" user
 # [As root]
 adduser dbadmin
@@ -130,7 +130,8 @@ adduser dbadmin
 ### Verify postgres database
 ```bash
 # Exit to "${USER}"
-sudo -u dbadmin psql
+sudo su dbadmin
+psql -d main
 # If this works, continue guide.
 # If not, circle back and look for missed steps.
 
