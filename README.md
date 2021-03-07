@@ -141,7 +141,8 @@ psql -d main
 
 CREATE DATABASE main;                             # Create database
 GRANT ALL PRIVILEGES ON DATABASE main TO dbadmin; # Allow dbadmin to perform all database admin functions.
-\q # Quits back to ${USER}
+\q # Quits back to dbadmin
+exit # Exit to ${USER}
 ```
 If you've been successful so far, pat yourself on the back. System is officially configured to handle a Django project!
 
