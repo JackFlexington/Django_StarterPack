@@ -31,6 +31,9 @@ If you're curious about how to do this manually, go [here](https://github.com/Ja
 * Script will prompt you some questions, you will need a github account setup.
   * Just answer the questions and the script should handle the rest.
 
+### Preview of installation
+![Installation gif](https://github.com/JackFlexington/Django_StarterPack/blob/readme_tweaks/_gifs/install_script.gif)
+
 ## Initializing the Django project
 Okay great, the script installed and configured a number of items for us to get the ball rolling on this web project.
 
