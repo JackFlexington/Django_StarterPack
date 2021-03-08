@@ -9,14 +9,14 @@
 # Environment Documentation
 
 ## Operating System Information
-* Acquired image on 12/20/2020
-* Ubuntu Desktop 20.04.1 LTS (file name = ```ubuntu-20.04.1-desktop-amd64.iso```)
+* Acquired image on 02/06/2021
+* Ubuntu Desktop 20.04.2 LTS (file name = ```ubuntu-20.04.2-desktop-amd64.iso```)
 * Debian-based
-* ISO file size: ~2.6-gigs (exact = ```2,785,017,856 bytes```)
+* ISO file size: ~2.67-gigs (exact = ```2,877,227,008 bytes```)
 * Link: [Download Ubuntu Desktop](https://ubuntu.com/download/desktop)
 * Link: [Release Notes](https://wiki.ubuntu.com/FocalFossa/ReleaseNotes)
 * Note: If you're using a Virtual Machine via "VMware" or "Virtual Box" or one of the others... remember to mount the .iso image so that you may install the operating system with ease.
-* Package Manager: [Advanced Package Tool(APT)](https://ubuntu.com/server/docs/package-management)
+* Package Manager Information: [Advanced Package Tool(APT)](https://ubuntu.com/server/docs/package-management)
 
 # STOP
 #### If you're curious about how to do this manually, go [here]().
@@ -31,6 +31,7 @@
 * Execute script by typing the following into your CLI (```./install.sh```)
 * Script will prompt you some questions, you will need a github account setup.
   * Just answer the questions and the script should handle the rest.
+
 ## Initializing the Django project
 Okay great, the script installed and configured a number of items for us to get the ball rolling on this web project.
 
@@ -45,44 +46,21 @@ django-admin startproject Django_StarterPack # Give a name to the overall applic
 cd Django_StaterPack                         # Navigate to freshly created application folder
 vi Django_StarterPack/settings.py
   # Modify ALLOWED_HOSTS = ["*"] # WARNING: NOT IDEAL FOR PRODUCTION ENVIRONMENT
-  # Add "main_app" to the list inside of INSTALLED_APPS = []
   # Add "postgreSQL" to the list of DATABASES = {}
   # Modify "TIME_ZONE" to your native time. (See link: "List of database time zones")
-  
-python3 manage.py migrate         # Update Django framework for database models
-python3 manage.py createsuperuser # Create a super user to interact with Django
-  # username = dbadmin | email = | password = secureDBpassword
-  # Just used the same profile that manages the database, to manage the Django framework
 ```
 Link: [List of database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
-
 ### Initialize application directories 
 ```bash
 # [As ${USER}]
 # This will initialize the appropriate files / folders
 # for storing the actual web application
 python3 manage.py startapp main_app
+
+vi Django_StarterPack/settings.py
+  # Add "main_app" to the list inside of INSTALLED_APPS = []
 ```
-### Configure application files
-```bash
-# [As ${USER}]
-vi Django_StarterPack/urls.py
-  # Add url for "main_app" and redirect "" -> "main_app"
-  # Enable serving of static files (CSS, JS, HTML, IMAGES, GIFS, etc...)
-  
-cd main_app/
-vi urls.py
-  # Add path for index
-  
-vi views.py
-  # Add index view
-  
-mkdir templates/
-vi templates/index.html
-  # Just add something here... example "hello world"
-  
-cd ../ # Navigate back to parent directory
-```
+
 ### Configure postgres
 ```bash
 # [As ${USER}]
@@ -92,11 +70,97 @@ psql
 ALTER USER dbadmin WITH PASSWORD 'secureDBpassword';
 \q
 exit # Or (CTRL+D)
+python3 manage.py createsuperuser # Create a super user to interact with Django
+  # username = dbadmin | email = | password = secureDBpassword
+  # Just used the same profile that manages the database, to manage the Django framework
 python3 manage.py makemigrations
 python3 manage.py migrate
+
+# Test configuration by running the Django server
 python3 manage.py runserver 0.0.0.0:8000
 ```
 If you're able to navigate to "127.0.0.1:8000" in any web browser then you've successfully configured this machine to run Django.
+
+### Configure Django url file (Django_StarterPack)
+```bash
+# [As ${USER}]
+vi Django_StarterPack/urls.py
+  # Add url for "main_app" and redirect "" -> "main_app"
+  # Enable serving of static files (CSS, JS, HTML, IMAGES, GIFS, etc...)
+```
+#### url.py example
+```bash
+# Libraries
+from django.contrib import admin
+from django.urls import path, include
+from django.views.generic import RedirectView
+
+# Default URL
+urlpatterns = [
+    path('admin/', admin.site.urls),
+]
+
+# Custom URL
+urlpatterns += [
+    path('main_app/', include('main_app.urls')),
+    path('', RedirectView.as_view(url='main_app/', permanent=True)),
+]
+
+# Serving static files
+from django.conf import settings
+from django.conf.urls.static import static
+
+# Location of "static/" folder
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+```
+
+### Configure Django application files (main_app)
+```bash
+cd main_app/
+vi urls.py
+  # Add path for index
+  # (See example below)
+  
+#### urls.py
+# Libraries
+from django.urls import path
+from . import views
+
+# Custom URL schema
+urlpatterns = [
+    path('', views.index, name='index'),
+]
+#### END urls.py EXAMPLE
+  
+vi views.py
+  # Add index view
+  # (See example below)
+
+#### views.py
+from django.shortcuts import render, HttpResponseRedirect
+from django.http import HttpRequest, HttpResponse
+
+# Create your views here.
+# Import database Classes # (LEAVE BELOW LINE BLANK UNTIL YOU'VE CREATED DATABASE TABLES) 
+from main_app.models import Student # (Example piece).
+
+def index(request):
+    """View function for home page of website."""
+    
+    # Acquire values from Django database and store them into this dictionary.
+    context = {}
+    
+    # Render webpage
+    return render(request, 'index.html', context=context)
+#### END views.py EXAMPLE
+
+# templates/ folder is where the reusable HTML code sections will reside.
+mkdir templates/
+vi templates/index.html
+  # Just add something here... example "hello world"
+  
+cd ../ # Navigate back to parent directory
+```
 
 ## Creating the Models
 ```bash
@@ -139,6 +203,21 @@ python3 manage.py runserver 0.0.0.0:8000  # Start server
   python3 manage.py migrate main_app
   ```
   Source: [StackOverflow Posting](https://stackoverflow.com/questions/39265898/programmingerror-error-during-template-rendering) && also error output from Django Application
+  
+# General Tips
+* Need to close your SSH connection / Terminal for any reason? See "[screen](http://www.gnu.org/software/screen/)" from GNU software... (Use case below)
+   ```bash
+   # Log into Terminal
+   screen # Activates the screen package (if downloaded)
+   cd ${DJANGO_DIRECTORY} # Change to directory that houses the "manage.py" file
+   python3 manage.py runserver 0.0.0.0:8000 # Run the server as normal
+   # Press both (ctrl + a) keys
+   # Press "d" to disconnect from "screen"
+   # Now we're back in the old Terminal that we know and love
+   # If you'd like to reconnect to the most recently opened "screen", type the below
+   screen -r # Connects to screen again
+   ```
+   Source: [StackOverflow](https://stackoverflow.com/questions/10656147/how-do-i-keep-my-django-server-running-even-after-i-close-my-ssh-session)
 
 # Sources / Reference material:
 * [Overall guide for Django initialization](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Tutorial_local_library_website)
