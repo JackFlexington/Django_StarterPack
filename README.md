@@ -7,7 +7,6 @@
   * [Hands-on down the best VIM Text Editor book](https://www.amazon.com/Mastering-Vim-Quickly-WTF-time/dp/1983325740)
 
 # Environment Documentation
-
 ## Operating System Information
 * Acquired image on 02/06/2021
 * Ubuntu Desktop 20.04.2 LTS (file name = ```ubuntu-20.04.2-desktop-amd64.iso```)
@@ -19,10 +18,10 @@
 * Package Manager Information: [Advanced Package Tool(APT)](https://ubuntu.com/server/docs/package-management)
 
 # STOP
-#### If you're curious about how to do this manually, go [here]().
+If you're curious about how to do this manually, go [here](https://github.com/JackFlexington/Django_StarterPack/tree/main/tutorial).
 
 ## Running the installation script
-* Copy [install.sh]() into a directory on your Ubuntu server.
+* Copy [install.sh](https://github.com/JackFlexington/Django_StarterPack/blob/main/django_setup_script.sh) into a directory on your Ubuntu server.
   * Or copy and contents into a file using ```vi install.sh```
   * Press ```i``` while in VI to enable "Editing mode"
   * ```Right-click``` your mouse and paste the contents within.
