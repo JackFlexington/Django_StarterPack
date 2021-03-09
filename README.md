@@ -31,6 +31,9 @@ If you're curious about how to do this manually, go [here](https://github.com/Ja
 * Script will prompt you some questions, you will need a github account setup.
   * Just answer the questions and the script should handle the rest.
 
+Note:
+If you receive something along the lines of "./install.sh: line 4: $'\r': command not found"... Then that means Windows (or some process) has appended "carriage return" to every single line within the script. Linux can't interpret these symbols therefore we'll need to convert the file within the Linux Command Line Terminal. (See [dos2unix](https://stackoverflow.com/questions/5688805/remove-carriage-return-in-bash-script-or-ignore-it-when-using-mv-mkdir) for more details) 
+
 ### Preview of installation
 ![Installation gif](https://github.com/JackFlexington/Django_StarterPack/blob/readme_tweaks/_gifs/install_script.gif)
 
