@@ -98,7 +98,7 @@ sudo -s useradd -m -p secureDBpassword dbadmin;
 sudo -u postgres createuser ${DB_USERNAME} -sd;  # superuser ; can create databases
 sudo -u postgres createdb main;
 sudo -u postgres useradd -m -p ${DB_PASSWORD} ${DB_USERNAME};
-PSQL_STRING="GRANT ALL PRIVILEGES ON DATABASE main TO ${DB_USERNAME}";
+PSQL_STRING="GRANT ALL PRIVILEGES ON DATABASE main TO ${DB_USERNAME} ; ALTER USER ${DB_USERNAME} WITH PASSWORD '${DB_PASSWORD}' ; ";
 echo ${PSQL_STRING} | sudo -u ${DB_USERNAME} psql main;
 
 # Move into Django application directory
