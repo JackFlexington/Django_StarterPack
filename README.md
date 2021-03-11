@@ -27,6 +27,7 @@ If you're curious about how to do this manually, go [here](https://github.com/Ja
   * ```Right-click``` your mouse and paste the contents within.
   * To save and exit the file type ```:wq``` (colon, w, q)
 * Give it read-write-execute permissions ```chmod 777 install.sh```
+* Prior to executing, please ensure you're logged in at the primary user on the account (not root, but the account you'll be using regularly)
 * Execute script by typing the following into your CLI (```./install.sh```)
 * Script will prompt you some questions, you will need a github account setup.
   * Just answer the questions and the script should handle the rest.
