@@ -99,6 +99,7 @@ vi Django_StarterPack/urls.py
   # Enable serving of static files (CSS, JS, HTML, IMAGES, GIFS, etc...)
 ```
 #### url.py example
+Note: Add ```,include``` to the below file.
 ```bash
 # Libraries
 from django.contrib import admin
@@ -152,7 +153,7 @@ from django.http import HttpRequest, HttpResponse
 
 # Create your views here.
 # Import database Classes # (LEAVE BELOW LINE BLANK UNTIL YOU'VE CREATED DATABASE TABLES) 
-from main_app.models import Student # (Example piece).
+# from main_app.models import Student # (Example piece).
 
 def index(request):
     """View function for home page of website."""
@@ -186,7 +187,9 @@ Link: [Example of Model creation](https://developer.mozilla.org/en-US/docs/Learn
 # [As ${USER}]
 cd ~/django/Django_StarterPack # Navigate to application directory, if needed.
 vi main_app/admin.py # Open admin file to register newly created databases.
+```
 ```py
+# admin.py
 from .models import Member, Products, Transactions
 admin.site.register(Member)
 admin.site.register(Products)
