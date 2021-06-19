@@ -55,8 +55,9 @@ vi Django_StarterPack/settings.py
   # Add "postgreSQL" to the list of DATABASES = {} # (See link: "postgreSQL_syntax)
   # Modify "TIME_ZONE" to your native time. # (See link: "List of database time zones")
 ```
-Link: [postgreSQL syntax]()
-Link: [List of database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+* Link: [postgreSQL syntax](https://github.com/JackFlexington/Django_StarterPack/blob/main/_samples/postgreSQL.py)
+* Link: [List of database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+
 ### Initialize application directories 
 ```bash
 # [As ${USER}]
@@ -74,14 +75,16 @@ vi Django_StarterPack/settings.py
 # Triple check that postgres password is setup correctly
 sudo su postgres
 psql
+# Remember to use the user/password you selected in the above postgrSQL section
 ALTER USER dbadmin WITH PASSWORD 'secureDBpassword';
 \q
 exit # Or (CTRL+D)
+
+python3 manage.py makemigrations
+python3 manage.py migrate
 python3 manage.py createsuperuser # Create a super user to interact with Django
   # username = dbadmin | email = | password = secureDBpassword
   # Just used the same profile that manages the database, to manage the Django framework
-python3 manage.py makemigrations
-python3 manage.py migrate
 
 # Test configuration by running the Django server
 python3 manage.py runserver 0.0.0.0:8000
