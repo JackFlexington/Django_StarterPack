@@ -52,9 +52,10 @@ django-admin startproject Django_StarterPack # Give a name to the overall applic
 cd Django_StaterPack                         # Navigate to freshly created application folder
 vi Django_StarterPack/settings.py
   # Modify ALLOWED_HOSTS = ["*"] # WARNING: NOT IDEAL FOR PRODUCTION ENVIRONMENT
-  # Add "postgreSQL" to the list of DATABASES = {}
-  # Modify "TIME_ZONE" to your native time. (See link: "List of database time zones")
+  # Add "postgreSQL" to the list of DATABASES = {} # (See link: "postgreSQL_syntax)
+  # Modify "TIME_ZONE" to your native time. # (See link: "List of database time zones")
 ```
+Link: [postgreSQL syntax]()
 Link: [List of database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
 ### Initialize application directories 
 ```bash
