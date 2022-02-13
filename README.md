@@ -70,6 +70,7 @@ vi Django_StarterPack/settings.py
 ```
 
 ### Configure postgres
+* Note: On Windows, follow this guide [Windows Postgresql installation guide](https://medium.com/@9cv9official/creating-a-django-web-application-with-a-postgresql-database-on-windows-c1eea38fe294)
 ```bash
 # [As ${USER}]
 # Triple check that postgres password is setup correctly
